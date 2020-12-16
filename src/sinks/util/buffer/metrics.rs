@@ -178,18 +178,7 @@ impl<N: MetricNormalize> Batch for MetricsBuffer<N> {
     }
 
     fn finish(self) -> Self::Output {
-        self.metrics
-            .0
-            .into_iter()
-            .map(|e| {
-                let mut metric = e.0;
-                if let MetricValue::Distribution { samples, statistic } = metric.data.value {
-                    let samples = compress_distribution(samples);
-                    metric.data.value = MetricValue::Distribution { samples, statistic };
-                };
-                metric
-            })
-            .collect()
+        self.metrics.0.into_iter().map(finish_metric).collect()
     }
 
     fn num_items(&self) -> usize {
@@ -291,6 +280,15 @@ impl MetricSet {
             }
         }
     }
+}
+
+fn finish_metric(metric: MetricEntry) -> Metric {
+    let mut metric = metric.0;
+    if let MetricValue::Distribution { samples, statistic } = metric.data.value {
+        let samples = compress_distribution(samples);
+        metric.data.value = MetricValue::Distribution { samples, statistic };
+    }
+    metric
 }
 
 fn compress_distribution(mut samples: Vec<Sample>) -> Vec<Sample> {
