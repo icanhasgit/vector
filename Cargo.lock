@@ -4770,6 +4770,7 @@ name = "prometheus-parser"
 version = "0.1.0"
 dependencies = [
  "nom 6.1.0",
+ "shared",
  "snafu",
 ]
 
