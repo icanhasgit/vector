@@ -41,6 +41,7 @@ pub mod internal_events;
 pub mod api;
 pub mod app;
 pub mod async_read;
+pub mod bench_util;
 pub mod encoding_transcode;
 pub mod heartbeat;
 pub mod http;

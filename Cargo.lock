@@ -7696,6 +7696,7 @@ dependencies = [
  "url",
  "uuid 0.8.2",
  "vector-api-client",
+ "vector-test-framework",
  "vector-wasm",
  "walkdir",
  "warp",
@@ -7719,6 +7720,13 @@ dependencies = [
  "url",
  "uuid 0.8.2",
  "weak-table",
+]
+
+[[package]]
+name = "vector-test-framework"
+version = "0.1.0"
+dependencies = [
+ "vector",
 ]
 
 [[package]]

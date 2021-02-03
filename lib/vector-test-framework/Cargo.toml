@@ -1,0 +1,8 @@
+[package]
+name = "vector-test-framework"
+version = "0.1.0"
+authors = ["MOZGIII <mike-n@narod.ru>"]
+edition = "2018"
+
+[dependencies]
+vector = { version = "0", path = "../..", default-features = false }

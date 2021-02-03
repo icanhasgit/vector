@@ -51,6 +51,7 @@ members = [
   "lib/tracing-limit",
   "lib/vector-api-client",
   "lib/vector-wasm",
+  "lib/vector-test-framework",
 ]
 
 [dependencies]
@@ -256,6 +257,7 @@ tokio = { version = "0.2", features = ["test-util"] }
 assert_cmd = "1.0.2"
 reqwest = { version = "0.10.9", features = ["json"] }
 rusty-fork = "0.3.0"
+vector-test-framework = { version = "0.1", path = "lib/vector-test-framework" }
 
 [features]
 # Default features for *-unknown-linux-gnu and *-apple-darwin
@@ -613,6 +615,8 @@ remap-benches = ["transforms-add_fields", "transforms-remap", "transforms-coerce
 language-benches = ["sinks-socket", "sources-socket", "transforms-add_fields", "transforms-json_parser", "transforms-regex_parser", "transforms-wasm", "transforms-lua", "transforms-remap"]
 # Separate benching process for metrics due to the nature of the bootstrap procedures.
 metrics-benches = ["sources-socket", "sinks-socket"]
+benches-dev = ["transforms-add_fields", "unix"]
+
 
 [[bench]]
 name = "default"
@@ -649,6 +653,11 @@ required-features = ["metrics-benches"]
 name = "metrics_off"
 harness = false
 required-features = ["metrics-benches"]
+
+[[bench]]
+name = "add_fields"
+harness = false
+required-features = ["benches-dev"]
 
 [patch.'https://github.com/tower-rs/tower']
 tower-layer = "=0.3.0"
